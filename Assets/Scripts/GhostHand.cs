@@ -23,8 +23,8 @@ public class GhostHand : MonoBehaviour
 	void Update () {
 		HandData data = null;
 			
-		if (UseRightHand) data = HandMath.GetMostRecentHandDataFromTime(HandHold.RightHandDatas,Util.GetTimestamp() - GhostTime);
-		else data = HandMath.GetMostRecentHandDataFromTime(HandHold.LeftHandDatas,Util.GetTimestamp() - GhostTime);
+//		if (UseRightHand) data = HandMath.GetMostRecentHandDataFromTime(HandHold.RightHandDatas,Util.GetTimestamp() - GhostTime);
+//		else data = HandMath.GetMostRecentHandDataFromTime(HandHold.HandDatas,Util.GetTimestamp() - GhostTime);
 
 		if (data == null)
 		{

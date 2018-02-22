@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class HandData {
 
-    public bool IsRightHand;
+    //public bool IsRightHand;
 
     public Leap.Vector HeadPosition;
     public Leap.Vector HeadEulerAngles;

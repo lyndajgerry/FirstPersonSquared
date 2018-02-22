@@ -199,7 +199,7 @@ public class VideoChatService : MonoBehaviour
         {
 
             //figure out hand datas we need to send and send them
-            List<HandData> leftOrderedDatas = HandMath.GetOrderedList(LocalHandHold.LeftHandDatas);
+            List<HandData> leftOrderedDatas = HandMath.GetOrderedList(LocalHandHold.HandDatas);
             foreach (HandData data in leftOrderedDatas)
             {
                 if (data.NetworkTimeStamp > LatestLeftDataSent)
@@ -216,24 +216,24 @@ public class VideoChatService : MonoBehaviour
 
             if (leftOrderedDatas.Count>0) LatestLeftDataSent = leftOrderedDatas[leftOrderedDatas.Count - 1].NetworkTimeStamp;
             
-            List<HandData> rightOrderedDatas = HandMath.GetOrderedList(LocalHandHold.RightHandDatas);
-            foreach (HandData data in rightOrderedDatas)
-            {
-                if (data.NetworkTimeStamp > LatestRightDataSent)
-                {
-                    string message = JsonUtility.ToJson(data);
-
-//                    string message = JsonConvert.SerializeObject(data,Formatting.Indented, 
-//                        new JsonSerializerSettings { 
-//                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-//                            
-//                        });
-
-                    Send(message);
-                }
-            }
-
-            if (rightOrderedDatas.Count>0) LatestRightDataSent = rightOrderedDatas[rightOrderedDatas.Count - 1].NetworkTimeStamp;
+//            List<HandData> rightOrderedDatas = HandMath.GetOrderedList(LocalHandHold.RightHandDatas);
+//            foreach (HandData data in rightOrderedDatas)
+//            {
+//                if (data.NetworkTimeStamp > LatestRightDataSent)
+//                {
+//                    string message = JsonUtility.ToJson(data);
+//
+////                    string message = JsonConvert.SerializeObject(data,Formatting.Indented, 
+////                        new JsonSerializerSettings { 
+////                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+////                            
+////                        });
+//
+//                    Send(message);
+//                }
+//            }
+//
+//            if (rightOrderedDatas.Count>0) LatestRightDataSent = rightOrderedDatas[rightOrderedDatas.Count - 1].NetworkTimeStamp;
             
             //update the call object. This will trigger all buffered events to be fired
             //to ensure it is done in the unity thread at a convenient time.
@@ -542,8 +542,8 @@ public class VideoChatService : MonoBehaviour
                     HandData data = JsonUtility.FromJson<HandData>(args.Content);
                     //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(args.Content);
                     //HandData data = MessagePackSerializer.Deserialize<HandData>(buffer);
-                    if (data.IsRightHand) RemoteHandHold.RightHandDatas.Add(data);
-                    else RemoteHandHold.LeftHandDatas.Add(data);
+//                    if (data.IsRightHand) RemoteHandHold.RightHandDatas.Add(data);
+                    RemoteHandHold.HandDatas.Add(data);
                     break;
                 }
             case CallEventType.WaitForIncomingCall:

@@ -15,14 +15,6 @@ public class HandHold : MonoBehaviour {
 
 
 	public float RecordingCullTime = 10f;
-	
-	
-	[Header("Head Transform Reference, only needed on local")] 
-	public Transform HeadTransform;
-	
-	
-	[HideInInspector]
-	public bool IsLocalHands;
 
 	private RigidFinger _leftThumb;
 	private RigidFinger _leftIndex;
@@ -30,18 +22,29 @@ public class HandHold : MonoBehaviour {
 	private RigidFinger _leftRing;
 	private RigidFinger _leftPinky;
 	
-	private RigidFinger _rightThumb;
-	private RigidFinger _rightIndex;
-	private RigidFinger _rightMiddle;
-	private RigidFinger _rightRing;
-	private RigidFinger _rightPinky;
+//	private RigidFinger _rightThumb;
+//	private RigidFinger _rightIndex;
+//	private RigidFinger _rightMiddle;
+//	private RigidFinger _rightRing;
+//	private RigidFinger _rightPinky;
 
-	public HandModelBase LeftHand;
-	public HandModelBase RightHand;
+//	public HandModelBase RightHand;
 	
-	public List<HandData> LeftHandDatas = new List<HandData>();
+	public List<HandData> HandDatas = new List<HandData>();
 	
-	public List<HandData> RightHandDatas = new List<HandData>();
+	
+		
+	
+	[Header("Below only needed on local.")] 
+	public Transform HeadTransform;
+	
+	
+	[HideInInspector]
+	public bool IsLocalHands;
+
+	public HandModelBase Hand;
+	
+//	public List<HandData> RightHandDatas = new List<HandData>();
 
 	void Awake()
 	{
@@ -78,21 +81,21 @@ public class HandHold : MonoBehaviour {
 		//double timestamp = Network.time;
 		
 		//cull data that is too old
-		CullData(LeftHandDatas,timestamp);
-		CullData(RightHandDatas,timestamp);
+		CullData(HandDatas,timestamp);
+//		CullData(RightHandDatas,timestamp);
 		
 		//only the local player can modify their own sync list of structs
 		if (!IsLocalHands) return;
 		
 		//if both hands are not initialized (both hands must first be detected by leap motion), dont run.
-		if (LeftHand.GetLeapHand() == null) return;
-		if (RightHand.GetLeapHand() == null) return;
+		if (Hand.GetLeapHand() == null) return;
+//		if (RightHand.GetLeapHand() == null) return;
 		
 
 		
 		//create new data and add it to our sync list of structs
-		HandData leftHandData = AddData(LeftHandDatas,LeftHand,false,timestamp);
-		HandData rightHandData = AddData(RightHandDatas,RightHand, true,timestamp);
+		HandData leftHandData = AddData(HandDatas,Hand,false,timestamp);
+//		HandData rightHandData = AddData(RightHandDatas,RightHand, true,timestamp);
 		
 //		Debug.Log("Index Finger Angle: L:" + leftHandData.Index.CalculateFullFingerAngle() + " R:"+rightHandData.Index.CalculateFullFingerAngle());
 //		Debug.DrawLine(leftHandData.PalmPosition,leftHandData.PalmPosition + leftHandData.PalmDirection.normalized);
@@ -171,7 +174,7 @@ public class HandHold : MonoBehaviour {
 			HandData data = new HandData();
 
 
-			data.IsRightHand = isRightHand;
+			//data.IsRightHand = isRightHand;
 
 			data.HeadPosition = new Leap.Vector(HeadTransform.position.x,HeadTransform.position.y,HeadTransform.position.z);
 			data.HeadEulerAngles = new Leap.Vector(HeadTransform.eulerAngles.x,HeadTransform.eulerAngles.y,HeadTransform.eulerAngles.z);
