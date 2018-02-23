@@ -92,10 +92,11 @@ public class Ovrvision : MonoBehaviour
 		CameraPlaneLeft = CameraLeft.transform.Find("LeftImagePlane").gameObject;
 		CameraPlaneRight = CameraRight.transform.Find("RightImagePlane").gameObject;
 
-		CameraLeft.transform.localPosition = Vector3.zero;
-		CameraRight.transform.localPosition = Vector3.zero;
-		CameraLeft.transform.localRotation = Quaternion.identity;
-		CameraRight.transform.localRotation = Quaternion.identity;
+        //commented out by jonathon
+		//CameraLeft.transform.localPosition = Vector3.zero;
+		//CameraRight.transform.localPosition = Vector3.zero;
+		//CameraLeft.transform.localRotation = Quaternion.identity;
+		//CameraRight.transform.localRotation = Quaternion.identity;
 
 		//Create cam texture
 		CameraTexLeft = new Texture2D(OvrPro.imageSizeW, OvrPro.imageSizeH, TextureFormat.BGRA32, false);
@@ -125,15 +126,17 @@ public class Ovrvision : MonoBehaviour
 
 		CameraRightGap = OvrPro.HMDCameraRightGap();
 
-		//Plane reset
-		CameraPlaneLeft.transform.localScale = new Vector3(OvrPro.aspectW, -OvrPro.aspectH, 1.0f);
-		CameraPlaneRight.transform.localScale = new Vector3(OvrPro.aspectW, -OvrPro.aspectH, 1.0f);
-		CameraPlaneLeft.transform.localPosition = new Vector3(-0.032f, 0.0f, OvrPro.GetFloatPoint());
-		float gapx = (CameraRightGap.x - 0.032f) * (282.6231f) / (OvrPro.GetFloatPoint());
-		float gapy = CameraRightGap.y * (282.6231f) / (OvrPro.GetFloatPoint());
-		CameraPlaneRight.transform.localPosition = new Vector3(gapx * 0.001f, gapy * 0.001f, OvrPro.GetFloatPoint());
 
-		UnityEngine.XR.InputTracking.Recenter();
+        //Plane reset
+        //commented out by jonathon
+        //CameraPlaneLeft.transform.localScale = new Vector3(OvrPro.aspectW, -OvrPro.aspectH, 1.0f);
+        //CameraPlaneRight.transform.localScale = new Vector3(OvrPro.aspectW, -OvrPro.aspectH, 1.0f);
+        //CameraPlaneLeft.transform.localPosition = new Vector3(-0.032f, 0.0f, OvrPro.GetFloatPoint());
+        //float gapx = (CameraRightGap.x - 0.032f) * (282.6231f) / (OvrPro.GetFloatPoint());
+        //float gapy = CameraRightGap.y * (282.6231f) / (OvrPro.GetFloatPoint());
+        //CameraPlaneRight.transform.localPosition = new Vector3(gapx * 0.001f, gapy * 0.001f, OvrPro.GetFloatPoint());
+
+        UnityEngine.XR.InputTracking.Recenter();
 
 		if (useOvrvisionTrack)
 		{

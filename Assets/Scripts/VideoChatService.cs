@@ -100,8 +100,8 @@ public class VideoChatService : MonoBehaviour
     
     
     [Header("Debug, do not change")]
-    public double LatestLeftDataSent = double.MinValue;
-    public double LatestRightDataSent = double.MinValue;
+    public double LatestDataSent = double.MinValue;
+    //public double LatestRightDataSent = double.MinValue;
     
     
     
@@ -202,7 +202,7 @@ public class VideoChatService : MonoBehaviour
             List<HandData> leftOrderedDatas = HandMath.GetOrderedList(LocalHandHold.HandDatas);
             foreach (HandData data in leftOrderedDatas)
             {
-                if (data.NetworkTimeStamp > LatestLeftDataSent)
+                if (data.NetworkTimeStamp > LatestDataSent)
                 {
                     string message = JsonUtility.ToJson(data);
 //                    string message = JsonConvert.SerializeObject(data,Formatting.Indented, 
@@ -214,7 +214,7 @@ public class VideoChatService : MonoBehaviour
                 }
             }
 
-            if (leftOrderedDatas.Count>0) LatestLeftDataSent = leftOrderedDatas[leftOrderedDatas.Count - 1].NetworkTimeStamp;
+            if (leftOrderedDatas.Count>0) LatestDataSent = leftOrderedDatas[leftOrderedDatas.Count - 1].NetworkTimeStamp;
             
 //            List<HandData> rightOrderedDatas = HandMath.GetOrderedList(LocalHandHold.RightHandDatas);
 //            foreach (HandData data in rightOrderedDatas)
