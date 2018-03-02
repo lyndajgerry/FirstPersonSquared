@@ -12,6 +12,6 @@ public class HandData {
     
     public double NetworkTimeStamp;
 
-    public Leap.Hand LeapHand;
+    //public Leap.Hand LeapHand;
 
 }

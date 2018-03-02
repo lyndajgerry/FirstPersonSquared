@@ -13,6 +13,7 @@ public class GhostHand : MonoBehaviour
 	public HandHold HandHold;
 
 	public bool UseRightHand;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -32,10 +33,10 @@ public class GhostHand : MonoBehaviour
 			return;
 		}
 		
-		Debug.Log(data.LeapHand.PalmPosition);
+		//Debug.Log(data.LeapHand.PalmPosition);
 
 		
-		HandModel.SetLeapHand(data.LeapHand);
+		//HandModel.SetLeapHand(data.LeapHand);
 		HandModel.UpdateHand();
 		
 	}

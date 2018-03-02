@@ -205,11 +205,12 @@ public class VideoChatService : MonoBehaviour
                 if (data.NetworkTimeStamp > LatestDataSent)
                 {
                     string message = JsonUtility.ToJson(data);
-//                    string message = JsonConvert.SerializeObject(data,Formatting.Indented, 
-//                        new JsonSerializerSettings { 
-//                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-//                        });
-                    
+                    //                    string message = JsonConvert.SerializeObject(data,Formatting.Indented, 
+                    //                        new JsonSerializerSettings { 
+                    //                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    //                        });
+
+                    Debug.Log("Sending: " + message);
                     Send(message);
                 }
             }
@@ -537,7 +538,7 @@ public class VideoChatService : MonoBehaviour
                     //text message received
                     MessageEventArgs args = e as MessageEventArgs;
                     //Append(args.Content);
-                    //Debug.Log("Recieved: " + args.Content);
+                    Debug.Log("Recieved: " + args.Content);
                     //HandData data = JsonConvert.DeserializeObject<HandData>(args.Content);
                     HandData data = JsonUtility.FromJson<HandData>(args.Content);
                     //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(args.Content);

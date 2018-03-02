@@ -88,7 +88,7 @@ public class HandHold : MonoBehaviour {
 		if (!IsLocalHands) return;
 		
 		//if both hands are not initialized (both hands must first be detected by leap motion), dont run.
-		if (Hand.GetLeapHand() == null) return;
+		//if (Hand.GetLeapHand() == null) return;
 //		if (RightHand.GetLeapHand() == null) return;
 		
 
@@ -143,32 +143,32 @@ public class HandHold : MonoBehaviour {
 		//(compared to expection thrown if reference is missing)
 		//so I am prioritizing making sure fingers are correctly referenced (e.g. index finger = index finger) over performance here.
 		
-		foreach (var fingerModel in hand.GetLeapHand().Fingers)
-		{
-			var f = (Finger) fingerModel;
-			switch (f.Type)
-			{
-				case Finger.FingerType.TYPE_THUMB:
-					thumb = f;
-					break;
-				case Finger.FingerType.TYPE_INDEX:
-					index = f;
-					break;
-				case Finger.FingerType.TYPE_MIDDLE:
-					middle = f;
-					break;
-				case Finger.FingerType.TYPE_RING:
-					ring = f;
-					break;
-				case Finger.FingerType.TYPE_PINKY:
-					pinky = f;
-					break;
-				case Finger.FingerType.TYPE_UNKNOWN:
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
+		//foreach (var fingerModel in hand.GetLeapHand().Fingers)
+		//{
+		//	var f = (Finger) fingerModel;
+		//	switch (f.Type)
+		//	{
+		//		case Finger.FingerType.TYPE_THUMB:
+		//			thumb = f;
+		//			break;
+		//		case Finger.FingerType.TYPE_INDEX:
+		//			index = f;
+		//			break;
+		//		case Finger.FingerType.TYPE_MIDDLE:
+		//			middle = f;
+		//			break;
+		//		case Finger.FingerType.TYPE_RING:
+		//			ring = f;
+		//			break;
+		//		case Finger.FingerType.TYPE_PINKY:
+		//			pinky = f;
+		//			break;
+		//		case Finger.FingerType.TYPE_UNKNOWN:
+		//			break;
+		//		default:
+		//			throw new ArgumentOutOfRangeException();
+		//	}
+		//}
 		
 		
 			HandData data = new HandData();
@@ -181,7 +181,7 @@ public class HandHold : MonoBehaviour {
 		
 			data.NetworkTimeStamp = timestamp;
 
-			data.LeapHand = hand.GetLeapHand();
+			//data.LeapHand = hand.GetLeapHand();
 
 //			data.PalmPosition = hand.GetPalmPosition();
 //			data.PalmDirection = hand.GetPalmDirection();
