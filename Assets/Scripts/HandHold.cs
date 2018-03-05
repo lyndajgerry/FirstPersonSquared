@@ -34,13 +34,9 @@ public class HandHold : MonoBehaviour {
 	
 	
 		
-	
-	[Header("Below only needed on local.")] 
 	public Transform HeadTransform;
 	
 	
-	[HideInInspector]
-	public bool IsLocalHands;
 
 	public HandModelBase Hand;
 	
@@ -85,7 +81,6 @@ public class HandHold : MonoBehaviour {
 //		CullData(RightHandDatas,timestamp);
 		
 		//only the local player can modify their own sync list of structs
-		if (!IsLocalHands) return;
 		
 		//if both hands are not initialized (both hands must first be detected by leap motion), dont run.
 		//if (Hand.GetLeapHand() == null) return;
@@ -181,7 +176,7 @@ public class HandHold : MonoBehaviour {
 		
 			data.NetworkTimeStamp = timestamp;
 
-			//data.LeapHand = hand.GetLeapHand();
+		//	data.LeapHand = hand.GetLeapHand();
 
 //			data.PalmPosition = hand.GetPalmPosition();
 //			data.PalmDirection = hand.GetPalmDirection();

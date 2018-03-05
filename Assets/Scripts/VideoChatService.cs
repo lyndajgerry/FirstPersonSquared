@@ -11,7 +11,6 @@ using LeapInternal;
 //using MessagePack;
 //using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Apple.TV;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA.WebCam;
 
@@ -28,7 +27,9 @@ public class VideoChatService : MonoBehaviour
 
     [Header("Hand Hold References")] 
     public HandHold LocalHandHold;
-    public HandHold RemoteHandHold;
+
+
+    public Transform RemoteHead;
     
     
     [Header("WebRtc Settings")]
@@ -157,8 +158,6 @@ public class VideoChatService : MonoBehaviour
     protected virtual void Awake()
     {
 
-        LocalHandHold.IsLocalHands = true;
-        RemoteHandHold.IsLocalHands = false;
 //        mUi = GetComponent<CallAppUi>();
 
     }
@@ -544,7 +543,14 @@ public class VideoChatService : MonoBehaviour
                     //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(args.Content);
                     //HandData data = MessagePackSerializer.Deserialize<HandData>(buffer);
 //                    if (data.IsRightHand) RemoteHandHold.RightHandDatas.Add(data);
-                    RemoteHandHold.HandDatas.Add(data);
+
+                    if (RemoteHead != null)
+                    {
+                        RemoteHead.transform.position = new Vector3(data.HeadPosition.x,data.HeadPosition.y,data.HeadPosition.z);
+                        RemoteHead.transform.eulerAngles = new Vector3(data.HeadEulerAngles.x,data.HeadEulerAngles.y,data.HeadEulerAngles.z);
+                        
+                    }
+                    
                     break;
                 }
             case CallEventType.WaitForIncomingCall:
