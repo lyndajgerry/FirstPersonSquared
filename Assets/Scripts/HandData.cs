@@ -7,11 +7,11 @@ public class HandData {
 
     //public bool IsRightHand;
 
-    public Leap.Vector HeadPosition;
-    public Leap.Vector HeadEulerAngles;
+    public Vector3 HeadPosition;
+    public Vector3 HeadEulerAngles;
     
     public double NetworkTimeStamp;
 
-    //public Leap.Hand LeapHand;
+    public Leap.Hand LeapHand;
 
 }

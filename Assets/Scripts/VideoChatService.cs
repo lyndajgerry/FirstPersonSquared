@@ -29,7 +29,9 @@ public class VideoChatService : MonoBehaviour
     public HandHold LocalHandHold;
 
 
+    [Header("Remote References")]
     public Transform RemoteHead;
+    public Transform RemoteHand;
     
     
     [Header("WebRtc Settings")]
@@ -198,8 +200,8 @@ public class VideoChatService : MonoBehaviour
         {
 
             //figure out hand datas we need to send and send them
-            List<HandData> leftOrderedDatas = HandMath.GetOrderedList(LocalHandHold.HandDatas);
-            foreach (HandData data in leftOrderedDatas)
+            List<HandData> orderedDatas = HandMath.GetOrderedList(LocalHandHold.HandDatas);
+            foreach (HandData data in orderedDatas)
             {
                 if (data.NetworkTimeStamp > LatestDataSent)
                 {
@@ -214,7 +216,7 @@ public class VideoChatService : MonoBehaviour
                 }
             }
 
-            if (leftOrderedDatas.Count>0) LatestDataSent = leftOrderedDatas[leftOrderedDatas.Count - 1].NetworkTimeStamp;
+            if (orderedDatas.Count>0) LatestDataSent = orderedDatas[orderedDatas.Count - 1].NetworkTimeStamp;
             
 //            List<HandData> rightOrderedDatas = HandMath.GetOrderedList(LocalHandHold.RightHandDatas);
 //            foreach (HandData data in rightOrderedDatas)
@@ -546,9 +548,14 @@ public class VideoChatService : MonoBehaviour
 
                     if (RemoteHead != null)
                     {
-                        RemoteHead.transform.position = new Vector3(data.HeadPosition.x,data.HeadPosition.y,data.HeadPosition.z);
-                        RemoteHead.transform.eulerAngles = new Vector3(data.HeadEulerAngles.x,data.HeadEulerAngles.y,data.HeadEulerAngles.z);
-                        
+                        RemoteHead.transform.position = data.HeadPosition;
+                        RemoteHead.transform.eulerAngles = data.HeadEulerAngles;
+
+                    }
+
+                    if (RemoteHand != null)
+                    {
+                        RemoteHand.transform.position = data.LeapHand.PalmPosition.ToVector3();
                     }
                     
                     break;

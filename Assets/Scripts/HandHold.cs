@@ -171,12 +171,12 @@ public class HandHold : MonoBehaviour {
 
 			//data.IsRightHand = isRightHand;
 
-			data.HeadPosition = new Leap.Vector(HeadTransform.position.x,HeadTransform.position.y,HeadTransform.position.z);
-			data.HeadEulerAngles = new Leap.Vector(HeadTransform.eulerAngles.x,HeadTransform.eulerAngles.y,HeadTransform.eulerAngles.z);
+		data.HeadPosition = HeadTransform.position;//new Leap.Vector(HeadTransform.position.x,HeadTransform.position.y,HeadTransform.position.z);
+		data.HeadEulerAngles = HeadTransform.eulerAngles;//new Leap.Vector(HeadTransform.eulerAngles.x,HeadTransform.eulerAngles.y,HeadTransform.eulerAngles.z);
 		
 			data.NetworkTimeStamp = timestamp;
 
-		//	data.LeapHand = hand.GetLeapHand();
+			if (Hand != null && Hand.GetLeapHand() != null) data.LeapHand = hand.GetLeapHand();
 
 //			data.PalmPosition = hand.GetPalmPosition();
 //			data.PalmDirection = hand.GetPalmDirection();
