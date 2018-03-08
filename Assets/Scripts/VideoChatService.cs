@@ -555,7 +555,7 @@ public class VideoChatService : MonoBehaviour
 
                     if (RemoteHand != null)
                     {
-                        RemoteHand.transform.position = data.LeapHand.PalmPosition.ToVector3();
+                        RemoteHand.transform.localPosition = data.LeapHand.PalmPosition.ToVector3();
                     }
                     
                     break;
