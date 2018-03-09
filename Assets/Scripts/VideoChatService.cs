@@ -211,7 +211,7 @@ public class VideoChatService : MonoBehaviour
                     //                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     //                        });
 
-                    Debug.Log("Sending: " + message);
+                    //Debug.Log("Sending: " + message);
                     Send(message);
                 }
             }
@@ -539,7 +539,7 @@ public class VideoChatService : MonoBehaviour
                     //text message received
                     MessageEventArgs args = e as MessageEventArgs;
                     //Append(args.Content);
-                    Debug.Log("Recieved: " + args.Content);
+                   // Debug.Log("Recieved: " + args.Content);
                     //HandData data = JsonConvert.DeserializeObject<HandData>(args.Content);
                     HandData data = JsonUtility.FromJson<HandData>(args.Content);
                     //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(args.Content);
@@ -548,7 +548,7 @@ public class VideoChatService : MonoBehaviour
 
                     if (RemoteHead != null)
                     {
-                        RemoteHead.transform.position = data.HeadPosition;
+                       // RemoteHead.transform.position = data.HeadPosition;
                         RemoteHead.transform.eulerAngles = data.HeadEulerAngles;
 
                     }
