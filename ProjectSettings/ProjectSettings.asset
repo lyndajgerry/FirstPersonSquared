@@ -582,7 +582,7 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: OVR_USE_PROCESSING_QUALITY_NONE
+    1: 
   platformArchitecture: {}
   scriptingBackend:
     Standalone: 0

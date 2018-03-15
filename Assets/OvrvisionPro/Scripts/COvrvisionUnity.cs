@@ -163,13 +163,14 @@ public class COvrvisionUnity
     public bool useOvrvisionAR = false;
 	public bool useOvrvisionTrack = false;
 	public bool useOvrvisionTrack_Calib = false;
-    
-    #if OVR_USE_PROCESSING_QUALITY_NONE
+
+#if OVR_USE_PROCESSING_QUALITY_NONE
         public int useProcessingQuality = OV_CAMQT_NONE;
-    #else
-        public int useProcessingQuality = OV_CAMQT_DMSRMP;
-    #endif
-    
+#else
+    //public int useProcessingQuality = OV_CAMQT_DMSRMP;
+    public int useProcessingQuality = OV_CAMQT_DMS;
+#endif
+
     public int imageSizeW, imageSizeH;
 	public float aspectW, aspectH;
 
