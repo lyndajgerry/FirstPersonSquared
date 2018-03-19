@@ -31,9 +31,22 @@ public class VideoChatService : MonoBehaviour
 
     [Header("Remote References")]
     public Transform RemoteHead;
-    public Transform RemoteHand;
-    
-    
+    //public Transform RemoteHand;
+    public bool IsLeftHand = false;
+    public Transform RemotePalmL;
+    public Transform RemoteThumbL;
+    public Transform RemoteIndexL;
+    public Transform RemoteMiddleL;
+    public Transform RemoteRingL;
+    public Transform RemotePinkyL;
+    public Transform RemotePalmR;
+    public Transform RemoteThumbR;
+    public Transform RemoteIndexR;
+    public Transform RemoteMiddleR;
+    public Transform RemoteRingR;
+    public Transform RemotePinkyR;
+
+
     [Header("WebRtc Settings")]
 
     public string SecretPassword;
@@ -553,11 +566,29 @@ public class VideoChatService : MonoBehaviour
 
                     }
 
-                    if (RemoteHand != null)
+                    //if (RemoteHand != null)
+                    //{
+                    //    RemoteHand.transform.localPosition = data.LeapHand.PalmPosition.ToVector3();
+                    //}
+                    if (IsLeftHand)
                     {
-                        RemoteHand.transform.localPosition = data.LeapHand.PalmPosition.ToVector3();
+                        RemotePalmL.transform.localPosition = data.LeapHand.PalmPosition.ToVector3();
+                        RemoteThumbL.transform.localPosition = data.LeapHand.GetThumb().TipPosition.ToVector3();
+                        RemoteIndexL.transform.localPosition = data.LeapHand.GetIndex().TipPosition.ToVector3();
+                        RemoteMiddleL.transform.localPosition = data.LeapHand.GetMiddle().TipPosition.ToVector3();
+                        RemoteRingL.transform.localPosition = data.LeapHand.GetRing().TipPosition.ToVector3();
+                        RemotePinkyL.transform.localPosition = data.LeapHand.GetPinky().TipPosition.ToVector3();
                     }
-                    
+                    else
+                    {
+                        RemotePalmR.transform.localPosition = data.LeapHand.PalmPosition.ToVector3();
+                        RemoteThumbR.transform.localPosition = data.LeapHand.GetThumb().TipPosition.ToVector3();
+                        RemoteIndexR.transform.localPosition = data.LeapHand.GetIndex().TipPosition.ToVector3();
+                        RemoteMiddleR.transform.localPosition = data.LeapHand.GetMiddle().TipPosition.ToVector3();
+                        RemoteRingR.transform.localPosition = data.LeapHand.GetRing().TipPosition.ToVector3();
+                        RemotePinkyR.transform.localPosition = data.LeapHand.GetPinky().TipPosition.ToVector3();
+                    }
+
                     break;
                 }
             case CallEventType.WaitForIncomingCall:

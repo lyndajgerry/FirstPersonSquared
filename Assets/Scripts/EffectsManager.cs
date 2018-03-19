@@ -8,10 +8,15 @@ public class EffectsManager : MonoBehaviour {
     public MeshRenderer localRightRend;
     public MeshRenderer remoteLeftRend;
     public MeshRenderer remoteRightRend;
+    public MeshEffectController meshController;
     [Range(0,1)]
     public float fader;
     public float localTransparency;
     public float remoteTransparency;
+
+    [Range(0, 1)]
+    public float strengthControl;
+    public float strengthMultiplier;
 
 
     private Material localLeft;
@@ -26,12 +31,15 @@ public class EffectsManager : MonoBehaviour {
         localRight = localRightRend.material;
         remoteLeft = remoteLeftRend.material;
         remoteRight = remoteRightRend.material;
+
+        strengthControl = 1;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
         UpdateFader();
+        UpdateStrength();
 	}
 
     void UpdateFader()
@@ -51,4 +59,10 @@ public class EffectsManager : MonoBehaviour {
         color.a = value;
         mat.color = color;
     }
+
+    private void UpdateStrength()
+    {
+
+        meshController.Strength = strengthControl * strengthMultiplier;
+    } 
 }
