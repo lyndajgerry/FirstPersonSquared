@@ -15,6 +15,8 @@ public class HandHold : MonoBehaviour {
 
 
 	public float RecordingCullTime = 10f;
+    public LeapServiceProvider leap;
+    bool isLeft;
 
 	private RigidFinger _leftThumb;
 	private RigidFinger _leftIndex;
@@ -38,7 +40,7 @@ public class HandHold : MonoBehaviour {
 	
 	
 
-	public HandModelBase Hand;
+	public Leap.Hand Hand;
 	
 //	public List<HandData> RightHandDatas = new List<HandData>();
 
@@ -78,18 +80,34 @@ public class HandHold : MonoBehaviour {
 		
 		//cull data that is too old
 		CullData(HandDatas,timestamp);
-//		CullData(RightHandDatas,timestamp);
-		
-		//only the local player can modify their own sync list of structs
-		
-		//if both hands are not initialized (both hands must first be detected by leap motion), dont run.
-		//if (Hand.GetLeapHand() == null) return;
-//		if (RightHand.GetLeapHand() == null) return;
-		
+        //		CullData(RightHandDatas,timestamp);
 
-		
+        //only the local player can modify their own sync list of structs
+
+        //if both hands are not initialized (both hands must first be detected by leap motion), dont run.
+        //if (Hand.GetLeapHand() == null) return;
+        //		if (RightHand.GetLeapHand() == null) return;
+
+        Frame frame = leap.CurrentFrame;
+        foreach (Hand h in frame.Hands)
+        {
+            if (h.IsLeft)
+            {
+                if (isLeft)
+                    Hand = h;
+            }
+            else if (h.IsRight)
+            {
+                if (!isLeft)
+                    Hand = h;
+            }
+        }
+        
+
 		//create new data and add it to our sync list of structs
 		HandData leftHandData = AddData(HandDatas,Hand,false,timestamp);
+
+        Debug.Log("Head: " + leftHandData.HeadEulerAngles + " Palm:" + leftHandData.LeapHand.PalmPosition);
 //		HandData rightHandData = AddData(RightHandDatas,RightHand, true,timestamp);
 		
 //		Debug.Log("Index Finger Angle: L:" + leftHandData.Index.CalculateFullFingerAngle() + " R:"+rightHandData.Index.CalculateFullFingerAngle());
@@ -122,7 +140,7 @@ public class HandHold : MonoBehaviour {
 		}
 	}
 
-	private HandData AddData(List<HandData>  handDatas, HandModelBase hand, bool isRightHand, double timestamp)
+	private HandData AddData(List<HandData>  handDatas, Leap.Hand hand, bool isRightHand, double timestamp)
 	{
 
 		Finger thumb = null;
@@ -176,7 +194,15 @@ public class HandHold : MonoBehaviour {
 		
 			data.NetworkTimeStamp = timestamp;
 
-			if (Hand != null && Hand.GetLeapHand() != null) data.LeapHand = hand.GetLeapHand();
+        if (Hand != null && Hand != null)
+        {
+            data.LeapHand = Hand;
+        }
+        else
+        {
+            Debug.Log("Hand is NULL");
+        }
+
 
 //			data.PalmPosition = hand.GetPalmPosition();
 //			data.PalmDirection = hand.GetPalmDirection();

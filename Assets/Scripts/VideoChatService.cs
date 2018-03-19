@@ -590,6 +590,8 @@ public class VideoChatService : MonoBehaviour
                     RemoteRing.transform.localPosition = data.LeapHand.GetRing().TipPosition.ToVector3();
                     RemotePinky.transform.localPosition = data.LeapHand.GetPinky().TipPosition.ToVector3();
 
+                    Debug.Log("RemotePalm: " + RemotePalm.transform.localPosition);
+
                     break;
                 }
             case CallEventType.WaitForIncomingCall:
