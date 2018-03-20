@@ -16,7 +16,7 @@ public class HandHold : MonoBehaviour {
 
 	public float RecordingCullTime = 10f;
     public LeapServiceProvider leap;
-    bool isLeft;
+    public bool isLeft;
 
 	private RigidFinger _leftThumb;
 	private RigidFinger _leftIndex;
@@ -107,7 +107,7 @@ public class HandHold : MonoBehaviour {
 		//create new data and add it to our sync list of structs
 		HandData leftHandData = AddData(HandDatas,Hand,false,timestamp);
 
-        Debug.Log("Head: " + leftHandData.HeadPosition + " Palm:" + leftHandData.PalmPosition);
+     //   Debug.Log("Head: " + leftHandData.HeadPosition + " Palm:" + leftHandData.PalmPosition);
 //		HandData rightHandData = AddData(RightHandDatas,RightHand, true,timestamp);
 		
 //		Debug.Log("Index Finger Angle: L:" + leftHandData.Index.CalculateFullFingerAngle() + " R:"+rightHandData.Index.CalculateFullFingerAngle());
@@ -197,12 +197,13 @@ public class HandHold : MonoBehaviour {
         if (Hand != null)
         {
             //Get position relative to head
-            data.PalmPosition = Hand.PalmPosition.ToVector3() - HeadTransform.position;
-            data.ThumbPosition = Hand.GetThumb().TipPosition.ToVector3() - HeadTransform.position;
-            data.IndexPosition = Hand.GetIndex().TipPosition.ToVector3() - HeadTransform.position;
-            data.MiddlePosition = Hand.GetMiddle().TipPosition.ToVector3() - HeadTransform.position;
-            data.RingPosition = Hand.GetRing().TipPosition.ToVector3() - HeadTransform.position;
-            data.PinkyPosition = Hand.GetPinky().TipPosition.ToVector3() - HeadTransform.position;
+
+            data.PalmPosition = (Hand.PalmPosition.ToVector3() - HeadTransform.position).RotatedBy(Quaternion.Inverse(HeadTransform.rotation)) ;
+            data.ThumbPosition = (Hand.GetThumb().TipPosition.ToVector3() - HeadTransform.position).RotatedBy(Quaternion.Inverse(HeadTransform.rotation));
+            data.IndexPosition = (Hand.GetIndex().TipPosition.ToVector3() - HeadTransform.position).RotatedBy(Quaternion.Inverse(HeadTransform.rotation));
+            data.MiddlePosition = (Hand.GetMiddle().TipPosition.ToVector3() - HeadTransform.position).RotatedBy(Quaternion.Inverse(HeadTransform.rotation));
+            data.RingPosition = (Hand.GetRing().TipPosition.ToVector3() - HeadTransform.position).RotatedBy(Quaternion.Inverse(HeadTransform.rotation));
+            data.PinkyPosition = (Hand.GetPinky().TipPosition.ToVector3() - HeadTransform.position).RotatedBy(Quaternion.Inverse(HeadTransform.rotation));
         }
         else
         {
