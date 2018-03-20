@@ -107,7 +107,7 @@ public class HandHold : MonoBehaviour {
 		//create new data and add it to our sync list of structs
 		HandData leftHandData = AddData(HandDatas,Hand,false,timestamp);
 
-        Debug.Log("Head: " + leftHandData.HeadEulerAngles + " Palm:" + leftHandData.LeapHand.PalmPosition);
+        Debug.Log("Head: " + leftHandData.HeadPosition + " Palm:" + leftHandData.PalmPosition);
 //		HandData rightHandData = AddData(RightHandDatas,RightHand, true,timestamp);
 		
 //		Debug.Log("Index Finger Angle: L:" + leftHandData.Index.CalculateFullFingerAngle() + " R:"+rightHandData.Index.CalculateFullFingerAngle());
@@ -194,9 +194,15 @@ public class HandHold : MonoBehaviour {
 		
 			data.NetworkTimeStamp = timestamp;
 
-        if (Hand != null && Hand != null)
+        if (Hand != null)
         {
-            data.LeapHand = Hand;
+            //Get position relative to head
+            data.PalmPosition = Hand.PalmPosition.ToVector3() - HeadTransform.position;
+            data.ThumbPosition = Hand.GetThumb().TipPosition.ToVector3() - HeadTransform.position;
+            data.IndexPosition = Hand.GetIndex().TipPosition.ToVector3() - HeadTransform.position;
+            data.MiddlePosition = Hand.GetMiddle().TipPosition.ToVector3() - HeadTransform.position;
+            data.RingPosition = Hand.GetRing().TipPosition.ToVector3() - HeadTransform.position;
+            data.PinkyPosition = Hand.GetPinky().TipPosition.ToVector3() - HeadTransform.position;
         }
         else
         {

@@ -583,12 +583,12 @@ public class VideoChatService : MonoBehaviour
                     //    RemotePinkyR.transform.localPosition = data.LeapHand.GetPinky().TipPosition.ToVector3();
                     //}
 
-                    RemotePalm.transform.localPosition = data.LeapHand.PalmPosition.ToVector3();
-                    RemoteThumb.transform.localPosition = data.LeapHand.GetThumb().TipPosition.ToVector3();
-                    RemoteIndex.transform.localPosition = data.LeapHand.GetIndex().TipPosition.ToVector3();
-                    RemoteMiddle.transform.localPosition = data.LeapHand.GetMiddle().TipPosition.ToVector3();
-                    RemoteRing.transform.localPosition = data.LeapHand.GetRing().TipPosition.ToVector3();
-                    RemotePinky.transform.localPosition = data.LeapHand.GetPinky().TipPosition.ToVector3();
+                    RemotePalm.transform.localPosition = data.PalmPosition;
+                    RemoteThumb.transform.localPosition = data.ThumbPosition;
+                    RemoteIndex.transform.localPosition = data.IndexPosition;
+                    RemoteMiddle.transform.localPosition = data.MiddlePosition;
+                    RemoteRing.transform.localPosition = data.RingPosition;
+                    RemotePinky.transform.localPosition = data.PinkyPosition;
 
                     Debug.Log("RemotePalm: " + RemotePalm.transform.localPosition);
 

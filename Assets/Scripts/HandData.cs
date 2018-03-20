@@ -12,6 +12,12 @@ public class HandData {
     
     public double NetworkTimeStamp;
 
-    public Leap.Hand LeapHand;
+    //public Leap.Hand LeapHand;
+    public Vector3 PalmPosition;
+    public Vector3 ThumbPosition;
+    public Vector3 IndexPosition;
+    public Vector3 MiddlePosition;
+    public Vector3 RingPosition;
+    public Vector3 PinkyPosition;
 
 }
