@@ -10,12 +10,16 @@ public class MeshEffectController : MonoBehaviour
     public GameObject[] Meshs;
 
     private float LastStrength;
+    private Color TintColor;
 
     // Use this for initialization
     void Start()
     {
 
         LastStrength = Strength;
+
+        TintColor = Meshs[0].GetComponent<Renderer>().material.GetColor("_TintColor");
+
     }
 
     // Update is called once per frame
@@ -47,6 +51,13 @@ public class MeshEffectController : MonoBehaviour
 
                 ParticleSystem.ShapeModule shape = particles.shape;
                 shape.radius = 0.0025f + (Strength * 0.001f);
+
+                Color newColor = renderer.material.GetColor("_TintColor");
+                newColor.r = TintColor.r * Strength;
+                newColor.g = TintColor.g * Strength;
+                newColor.b = TintColor.b * Strength;
+                //renderer.material.SetFloat("_Brightness", Strength);
+                renderer.material.SetColor("_TintColor", newColor);
             }
             LastStrength = Strength;
         }

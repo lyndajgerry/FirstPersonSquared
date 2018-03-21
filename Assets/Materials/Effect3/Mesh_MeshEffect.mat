@@ -73,4 +73,4 @@ Material:
     - _Color: {r: 3, g: 1.5517249, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _TimeScale: {r: 3, g: -6, b: -8, a: -5}
-    - _TintColor: {r: 7.000002, g: 1.5931045, b: 0, a: 1}
+    - _TintColor: {r: 7.0000024, g: 1.5931045, b: 0, a: 1}

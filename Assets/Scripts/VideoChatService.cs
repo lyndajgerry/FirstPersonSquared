@@ -16,6 +16,7 @@ using UnityEngine.XR.WSA.WebCam;
 
 public class VideoChatService : MonoBehaviour
 {
+    public EffectsManager effectsManager;
 
     [Header("Camera Settings, string=name, int=index")] 
     public string CameraNameOrIndex = "0";
@@ -591,6 +592,12 @@ public class VideoChatService : MonoBehaviour
                     RemotePinky.transform.localPosition = data.PinkyPosition;
 
                     Debug.Log("RemotePalm: " + RemotePalm.transform.localPosition);
+
+                    if (!effectsManager.isMaster)
+                    {
+                        effectsManager.fader = data.FaderValue;
+                        effectsManager.strengthControl = data.StrengthValue;
+                    }
 
                     break;
                 }

@@ -9,6 +9,9 @@ public class EffectsManager : MonoBehaviour {
     public MeshRenderer remoteLeftRend;
     public MeshRenderer remoteRightRend;
     public MeshEffectController meshController;
+    public bool isMaster;
+    [Range(0, 1)]
+    public float masterFader;
     [Range(0,1)]
     public float fader;
     public float localTransparency;
@@ -19,6 +22,7 @@ public class EffectsManager : MonoBehaviour {
     public float strengthMultiplier;
 
 
+    private float lastMaster;
     private Material localLeft;
     private Material localRight;
     private Material remoteLeft;
@@ -40,6 +44,7 @@ public class EffectsManager : MonoBehaviour {
     {
         UpdateFader();
         UpdateStrength();
+        UpdateMaster();
 	}
 
     void UpdateFader()
@@ -65,4 +70,14 @@ public class EffectsManager : MonoBehaviour {
 
         meshController.Strength = strengthControl * strengthMultiplier;
     } 
+
+    private void UpdateMaster()
+    {
+        if (masterFader != lastMaster)
+        {
+            fader = masterFader;
+            strengthControl = (1 - masterFader);
+        }
+        lastMaster = masterFader;
+    }
 }

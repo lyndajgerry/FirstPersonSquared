@@ -13,7 +13,7 @@ public class HandHold : MonoBehaviour {
 
 
 
-
+    public EffectsManager effectsManager;
 	public float RecordingCullTime = 10f;
     public LeapServiceProvider leap;
     public bool isLeft;
@@ -103,6 +103,7 @@ public class HandHold : MonoBehaviour {
             }
         }
         
+    
 
 		//create new data and add it to our sync list of structs
 		HandData leftHandData = AddData(HandDatas,Hand,false,timestamp);
@@ -117,6 +118,7 @@ public class HandHold : MonoBehaviour {
 //		Debug.DrawLine(leftHandData.PalmPosition,leftHandData.PalmPosition + leftHandData.PalmNormal.normalized,Color.red);
 //		Debug.DrawLine(rightHandData.PalmPosition,rightHandData.PalmPosition + rightHandData.PalmNormal.normalized,Color.red);
 		
+
 
 	}
 	
@@ -193,6 +195,9 @@ public class HandHold : MonoBehaviour {
 		data.HeadEulerAngles = HeadTransform.eulerAngles;//new Leap.Vector(HeadTransform.eulerAngles.x,HeadTransform.eulerAngles.y,HeadTransform.eulerAngles.z);
 		
 			data.NetworkTimeStamp = timestamp;
+
+        data.FaderValue = effectsManager.fader;
+        data.StrengthValue = effectsManager.strengthControl;
 
         if (Hand != null)
         {
